@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: omar-chat
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /data/chat.db
+      - key: PORT
+        value: 3000
+    disk:
+      name: chat-data
+      mountPath: /data
+      sizeGB: 1

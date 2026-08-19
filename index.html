@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Omar Chat</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- AUTH SCREEN -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <h1>💬 Omar Chat</h1>
+      <div class="tabs">
+        <button id="tabLogin" class="tab active">تسجيل الدخول</button>
+        <button id="tabRegister" class="tab">حساب جديد</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <input type="text" id="loginUsername" placeholder="اسم المستخدم" required autocomplete="username" />
+        <input type="password" id="loginPassword" placeholder="كلمة السر" required autocomplete="current-password" />
+        <button type="submit">دخول</button>
+        <p class="error" id="loginError"></p>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="regUsername" placeholder="اسم المستخدم (بالإنجليزي)" required />
+        <input type="text" id="regDisplayName" placeholder="الاسم اللي هيظهر للناس" required />
+        <input type="password" id="regPassword" placeholder="كلمة السر (٦ حروف على الأقل)" required />
+        <button type="submit">إنشاء حساب</button>
+        <p class="error" id="registerError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHAT SCREEN -->
+  <div id="chatScreen" class="chat-screen hidden">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="me">
+          <span id="meAvatar" class="avatar"></span>
+          <span id="meName"></span>
+        </div>
+        <button id="logoutBtn" title="تسجيل خروج">⏻</button>
+      </div>
+
+      <div class="sidebar-actions">
+        <button id="newDirectBtn">+ محادثة جديدة</button>
+        <button id="newGroupBtn">+ جروب جديد</button>
+      </div>
+
+      <div id="conversationList" class="conversation-list"></div>
+    </aside>
+
+    <main class="chat-main">
+      <div id="emptyState" class="empty-state">
+        اختار محادثة من الشمال أو ابدأ واحدة جديدة 👈
+      </div>
+
+      <div id="chatPane" class="chat-pane hidden">
+        <div class="chat-header">
+          <span id="chatAvatar" class="avatar"></span>
+          <span id="chatTitle"></span>
+          <span id="typingIndicator" class="typing-indicator"></span>
+        </div>
+        <div id="messagesContainer" class="messages-container"></div>
+        <form id="messageForm" class="message-form">
+          <input type="text" id="messageInput" placeholder="اكتب رسالة..." autocomplete="off" />
+          <button type="submit">إرسال</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- NEW DIRECT CHAT MODAL -->
+  <div id="directModal" class="modal hidden">
+    <div class="modal-box">
+      <h3>ابدأ محادثة مع...</h3>
+      <div id="userList" class="user-list"></div>
+      <button class="closeModal" data-modal="directModal">إلغاء</button>
+    </div>
+  </div>
+
+  <!-- NEW GROUP MODAL -->
+  <div id="groupModal" class="modal hidden">
+    <div class="modal-box">
+      <h3>جروب جديد</h3>
+      <input type="text" id="groupName" placeholder="اسم الجروب" />
+      <div id="groupUserList" class="user-list"></div>
+      <button id="createGroupBtn">إنشاء الجروب</button>
+      <button class="closeModal" data-modal="groupModal">إلغاء</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
